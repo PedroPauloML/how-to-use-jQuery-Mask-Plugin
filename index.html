@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to use jQuery Mask Plugin</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    .full-screen { min-height: 100vh; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-center flex-column full-screen py-5">
+      <h1 class="mb-4">How to use jQuery Mask Plugin</h1>
+
+      <p class="mb-5">A simple example how to use jQuery Mask Plugin.</p>
+
+      <div class="form-group">
+        <label for="cpf">CPF</label>
+        <input type="text" id="cpf" name="cpf" class="form-control cpfMask" placeholder="Type your CPF" />
+      </div>
+
+      <div class="form-group">
+        <label for="cnpj">CNPJ</label>
+        <input type="text" id="cnpj" name="cnpj" class="form-control cnpjMask" placeholder="Type your CNPJ" />
+      </div>
+
+      <div class="form-group">
+        <label for="cpfOrCnpj">CPF or CNPJ</label>
+        <input type="text" id="cpfOrCnpj" name="cpfOrCnpj" class="form-control cpfCnpjMask" placeholder="Type your CPF or CNPJ" />
+      </div>
+
+      <p class="mt-5 pt-5 border-top">Read more in <a href="https://igorescobar.github.io/jQuery-Mask-Plugin/">jQuery Mask Plugin - A jQuery Plugin to make masks on form fields and html elements.</a></p>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Setting all elements with class ".cpfMask" to use the mask of CPF
+      $('.cpfMask').mask('000.000.000-00')
+      // Setting all elements with class ".cnpjMask" to use the mask of CNPJ
+      $('.cnpjMask').mask('00.000.000/0000-00')
+
+      // Option to choose which mask use
+      const cpf_cnpj_options = {
+        onKeyPress: (cpf_cnpj, e, field, options) => {
+          // Put CPF mask with one more charecter to permit the change to CNPJ mask
+          const masks = ['000.000.000-000', '00.000.000/0000-00']
+          // Choosing which mask use based on input length
+          const mask  = cpf_cnpj.length > 14 ? masks[1] : masks[0]
+          // Applying choose
+          $('.cpfCnpjMask').mask(mask, options)
+        }
+      }
+
+      // Setting all elements with class ".cpfCnpjMask" to use the mask of CPF/CPNJ
+      // passing options to toggle between CPF and CNPJ mask
+      $('.cpfCnpjMask').mask('00.000.000/0000-00', cpf_cnpj_options)
+    });
+  </script>
+</body>
+</html>
