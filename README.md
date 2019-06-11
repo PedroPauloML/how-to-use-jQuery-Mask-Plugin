@@ -96,4 +96,4 @@ Your body tag should stay like this:
 
 Now, all is ready! Just that!
 
-Any doubt on building example? See the [example HTML](#).
+Any doubt on building example? See the [example HTML](https://github.com/PedroPauloML/how-to-use-jQuery-Mask-Plugin/blob/master/index.html).
